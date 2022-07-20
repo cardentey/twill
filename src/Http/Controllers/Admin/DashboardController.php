@@ -392,6 +392,7 @@ class DashboardController extends Controller
             $moduleOptions = [
                 'count' => $module['count'] ?? false,
                 'create' => $module['create'] ?? false,
+                'link' => $module['link'] ?? true,
                 'label' => $module['label'] ?? $module['name'],
                 'singular' => $module['label_singular'] ?? Str::singular($module['name']),
             ];
@@ -403,11 +404,11 @@ class DashboardController extends Controller
                     'all',
                     $module['countScope'] ?? []
                 ) : null,
-                'url' => moduleRoute(
+                'url' => $moduleOptions['link'] ? moduleRoute(
                     $module['name'],
                     $module['routePrefix'] ?? null,
                     'index'
-                ),
+                ) : null,
                 'createUrl' => $moduleOptions['create'] ? moduleRoute(
                     $module['name'],
                     $module['routePrefix'] ?? null,
