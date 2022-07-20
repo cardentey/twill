@@ -21,10 +21,18 @@
         </div>
         <div class="shortcutCreator__listing">
           <template v-for="(entity, index) in entities">
-            <a class="shortcutCreator__listingItem" :href="entity.url" v-if="entity.number" :key="index">
-              <span class="shortcutCreator__label">{{ entity.label }}</span>
-              <h3 class="shortcutCreator__sum f--heading">{{ entity.number }}</h3>
-            </a>
+            <template v-if="entity.url">
+              <a class="shortcutCreator__listingItem" :href="entity.url" v-if="entity.number" :key="index">
+                <span class="shortcutCreator__label">{{ entity.label }}</span>
+                <h3 class="shortcutCreator__sum f--heading">{{ entity.number }}</h3>
+              </a>
+            </template>
+            <template v-else>
+              <div class="shortcutCreator__listingItem" v-if="entity.number" :key="index">
+                <span class="shortcut__label">{{ entity.label }}</span>
+                <h3 class="shortcutCreator__sum f--heading">{{ entity.number }}</h3>
+              </div>
+            </template>
           </template>
         </div>
       </div>
@@ -117,6 +125,12 @@
         font-weight: 400;
       }
     }
+  }
+
+  .shortcut__label {
+    padding-bottom: 7px;
+    display: block;
+    position: relative;
   }
 
   .shortcutCreator__label {
